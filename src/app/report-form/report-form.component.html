@@ -1,0 +1,59 @@
+<div class="columns is-centered">
+  <form class="column is-half box">
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">Ngày nghỉ</label>
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input required type="date" [(ngModel)]="report.date" name="date" class="input" placeholder="Ngày nghỉ">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">GV nghỉ</label>
+      </div>
+
+      <div class="field-body">
+        <div class="field">
+          <div class="control is-expanded">
+            <div class="select is-fullwidth">
+              <select required name="teacherAbsent" [(ngModel)]="report.teacherAbsent">
+                <option *ngFor="let item of teacherAbsent" [value]="item.shortName">{{item.name}}-{{item.shortName}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let item of formCount">
+      <app-session-form></app-session-form>
+      <hr>
+    </ng-container>
+
+    <div class="field">
+      <label class="label">Ghi chú</label>
+      <div class="control">
+        <textarea name="note" [(ngModel)]="report.note" class="textarea" placeholder="Ghi chú"></textarea>
+      </div>
+    </div>
+
+    <div class="level is-mobile">
+      <div class="level-item">
+        <button type="button" class="button" (click)="addSession()">Thêm</button>
+      </div>
+
+      <div class="level-item">
+        <button type="button" class="button is-danger" (click)="deleteSession()">Xóa tiết</button>
+      </div>
+    </div>
+
+  </form>
+</div>
