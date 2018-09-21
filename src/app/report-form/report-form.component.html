@@ -24,6 +24,7 @@
           <div class="control is-expanded">
             <div class="select is-fullwidth">
               <select required name="teacherAbsent" [(ngModel)]="report.teacherAbsent">
+                <option [value]="null">Chọn giáo viên nghỉ</option>
                 <option *ngFor="let item of teacherAbsent" [value]="item.shortName">{{item.name}}-{{item.shortName}}
                 </option>
               </select>

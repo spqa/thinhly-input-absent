@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Teacher} from '../models/teacher';
 import {Report} from '../models/report';
-import {ApiService} from '../api.service';
 import {SessionFormComponent} from '../session-form/session-form.component';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-report-form',
@@ -15,7 +15,7 @@ export class ReportFormComponent implements OnInit {
   formCount = [1];
   @ViewChildren(SessionFormComponent) sessions: QueryList<SessionFormComponent>;
 
-  constructor(private api: ApiService) {
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
@@ -44,5 +44,11 @@ export class ReportFormComponent implements OnInit {
       return;
     }
     this.formCount.pop();
+  }
+
+  resetForm() {
+    this.report = new Report();
+    this.formCount = [1];
+    this.sessions.first.ngOnInit();
   }
 }

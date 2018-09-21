@@ -10,6 +10,7 @@ import {Report} from './models/report';
 })
 export class ApiService {
 
+  static VICE_PRESIDENT = 'vice-president';
   constructor(private http: HttpClient) {
   }
 
@@ -35,5 +36,25 @@ export class ApiService {
 
   createReport(report: Report) {
     return this.http.post(`${environment.endpoint}/report`, report);
+  }
+
+  getVPClasses(): Observable<String[]> {
+    return this.http.get<String[]>(`${environment.endpoint}/${ApiService.VICE_PRESIDENT}/classes`);
+  }
+
+  getVicePresidentList(): Observable<String[]> {
+    return this.http.get<String[]>(`${environment.endpoint}/${ApiService.VICE_PRESIDENT}/list`);
+  }
+
+  getVPGroups(): Observable<String[]> {
+    return this.http.get<String[]>(`${environment.endpoint}/${ApiService.VICE_PRESIDENT}/groups`);
+  }
+
+  getVPReasons(): Observable<String[]> {
+    return this.http.get<String[]>(`${environment.endpoint}/${ApiService.VICE_PRESIDENT}/reasons`);
+  }
+
+  getVPTeachers(): Observable<String[]> {
+    return this.http.get<String[]>(`${environment.endpoint}/${ApiService.VICE_PRESIDENT}/teachers`);
   }
 }

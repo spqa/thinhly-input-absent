@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   constructor(private api: ApiService) {
     this.api.getReporters().subscribe(x => {
       this.reporters = x;
-      this.changeReporter(x[0].shortName);
     });
   }
 
@@ -33,7 +32,9 @@ export class AppComponent implements OnInit {
   }
 
   changeReporter(value: string) {
-    this.api.getTeachersByReporter(value).subscribe(x => this.teacherAbsent = x);
+    if (value) {
+      this.api.getTeachersByReporter(value).subscribe(x => this.teacherAbsent = x);
+    }
   }
 
   createReport() {
@@ -42,8 +43,9 @@ export class AppComponent implements OnInit {
     console.log(reports);
     let isValid = true;
     for (const report of reports) {
-      if (!!!report.date || !!!report.session || !!!report.teacherAbsent || !!!report.className
-        || !!!report.reason || !!!report.teacherAlternative) {
+      if (report.date && report.session && report.teacherAbsent && report.className && report.reason) {
+
+      } else {
         isValid = false;
         alert('Có giá trị không hợp lệ');
         break;
@@ -61,6 +63,9 @@ export class AppComponent implements OnInit {
           if (this.isLoading === true) {
             alert('Lưu thành công');
             this.isLoading = false;
+            this.formCount = [];
+            this.addTeacher();
+            this.reports.first.resetForm();
           }
         },
         (err) => {

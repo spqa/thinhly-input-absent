@@ -13,6 +13,7 @@
               <div class="control is-expanded">
                 <div class="select is-fullwidth">
                   <select #reportersForm (change)="changeReporter($event.target.value)">
+                    <option [value]="null">Chọn người báo cáo</option>
                     <option *ngFor="let item of reporters" [value]="item.shortName">{{item.name}}-{{item.shortName}}
                     </option>
                   </select>
@@ -34,7 +35,9 @@
     </ng-container>
 
     <div class="columns is-centered">
-      <button class="button btn-bc is-primary" [class.is-loading]="isLoading" (click)="createReport()">BC</button>
+      <button class="button btn-bc is-primary" [class.is-loading]="isLoading" [disabled]="isLoading"
+              (click)="createReport()">BC
+      </button>
       <button class="button btn-bc" (click)="addTeacher()">Thêm giáo viên</button>
       <button class="button is-danger" (click)="deleteTeacher()">Xóa giáo viên</button>
     </div>

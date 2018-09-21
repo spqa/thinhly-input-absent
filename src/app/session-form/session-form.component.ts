@@ -28,6 +28,12 @@ export class SessionFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.session = {
+      session: null,
+      className: null,
+      reason: null,
+      teacherAlternative: null
+    };
     this.api.getClasses().subscribe(x => this.classes = x);
     this.api.getReasons().subscribe(x => this.reasons = x);
     this.api.getTeachers().subscribe(x => this.teacherAlternative = x);
